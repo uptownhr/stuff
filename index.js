@@ -37,8 +37,8 @@ app.post('/email-exists', function(req,res){
     })
 })
 
-app.post('enter-sweep', function(req,res){
-  let body = this.body
+app.post('/enter-sweep', function(req,res){
+  let body = req.body
   sweepStake(body)
     .then(function(entered){
       res.send(entered)
@@ -71,34 +71,49 @@ function api(url, request_param){
 }
 
 function sweepStake(params){
-  const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
+  return new Promise(function(resolve, reject){
+    const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
-  let entry = params
-  entry.entryContext = {
-    '@application': 'sweep_batch_upload',
-    '@formName': '',
-    '@siteCode': '',
-    '@ip': '',
-    '@referer': '',
-    '@url': ''
-  }
-
-
-  request({
-    url: url,
-    method: 'POST',
-    oauth: {
-      consumer_key: '',
-      consumer_secret: ''
-    },
-    json: {
-      sweepstakeEntry: {
-        userEntry: entry
-      }
+    params = {
+      '@address1': '1234 wilshire',
+      '@city': 'los angeles',
+      '@countryCode': 'US',
+      '@stateCode': 'CA',
+      '@zipCode': '90017',
+      '@firstname': 'James',
+      '@lastname': 'Testing',
+      '@email': 'testing@testing.com'
     }
-  }, function(err,res,body){
-    if(err) return reject(err)
-    if(res.statusCode != 200) return reject(res.statusMessage)
+
+    let entry = params
+    entry.entryContext = {
+      '@application': 'sweep_batch_upload',
+      '@formName': 'testform',
+      '@siteCode': 'testcode',
+      '@ip': '1.1.1.1',
+      '@referer': 'http://google.com',
+      '@url': 'http://localhost'
+    }
+
+
+    request({
+      url: url,
+      method: 'POST',
+      oauth: {
+        consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
+        consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
+      },
+      json: {
+        sweepstakeEntry: {
+          userEntry: entry
+        }
+      }
+    }, function(err,res,body){
+      if(err) return reject(err)
+      if(res.statusCode != 200) return reject(res.statusMessage)
+
+      resolve(body)
+    })
   })
 }
 
