@@ -1,0 +1,309 @@
+.clear {
+    clear: both;
+}
+
+body {
+    padding-bottom: 50px;
+}
+
+.mobile {
+    display: none;
+}
+
+@font-face {
+    font-family: 'GraphikBACondBold';
+    src: url('../fonts/GraphikBACondBold.eot');
+    src: url('../fonts/GraphikBACondBold.eot') format('embedded-opentype'),
+         url('../fonts/GraphikBACondBold.woff2') format('woff2'),
+         url('../fonts/GraphikBACondBold.woff') format('woff'),
+         url('../fonts/GraphikBACondBold.ttf') format('truetype'),
+         url('../fonts/GraphikBACondBold.svg#GraphikBACondBold') format('svg');
+}
+
+@font-face {
+    font-family: 'GraphikBACondMedium';
+    src: url('../fonts/GraphikBACondMedium.eot');
+    src: url('../fonts/GraphikBACondMedium.eot') format('embedded-opentype'),
+         url('../fonts/GraphikBACondMedium.woff2') format('woff2'),
+         url('../fonts/GraphikBACondMedium.woff') format('woff'),
+         url('../fonts/GraphikBACondMedium.ttf') format('truetype'),
+         url('../fonts/GraphikBACondMedium.svg#GraphikBACondMedium') format('svg');
+}
+
+@font-face {
+    font-family: 'GraphikMedium';
+    src: url('../fonts/GraphikMedium_0.eot');
+    src: url('../fonts/GraphikMedium_0.eot') format('embedded-opentype'),
+         url('../fonts/GraphikMedium_0.woff2') format('woff2'),
+         url('../fonts/GraphikMedium_0.woff') format('woff'),
+         url('../fonts/GraphikMedium_0.ttf') format('truetype'),
+         url('../fonts/GraphikMedium_0.svg#GraphikMedium_0') format('svg');
+}
+
+@font-face {
+    font-family: 'GraphikLight';
+    src: url('../fonts/GraphikLight_0.eot');
+    src: url('../fonts/GraphikLight_0.eot') format('embedded-opentype'),
+         url('../fonts/GraphikLight_0.woff2') format('woff2'),
+         url('../fonts/GraphikLight_0.woff') format('woff'),
+         url('../fonts/GraphikLight_0.ttf') format('truetype'),
+         url('../fonts/GraphikLight_0.svg#GraphikLight_0') format('svg');
+}
+
+body {
+    background: white;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 940px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#page-2, #page-3 {
+    display: none;
+}
+
+.head {
+    background: url(../img/header.png) center center no-repeat;
+    background-size: 100% auto;
+}
+
+.head span {
+    display: none;
+}
+
+#page-1 .head {
+    width: 301px;
+    height: 169px;
+    margin-top: 30px;
+    margin-right: 63px;
+}
+
+#page-1 {
+    height: 977px;
+    background: url(../img/bg.jpg) center center no-repeat;
+}
+
+#page-1 h1 {
+    color: white;
+    text-transform: uppercase;
+    font-size: 42px;
+    letter-spacing: 1px;
+    line-height: 1;
+    width: 248px;
+    padding: 16px 0;
+    text-align: center;
+    margin: 19px 86px 16px 0;
+    font-weight: 400;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#form1 {
+    width: 380px;
+    float: right;
+    margin-right: 20px;
+}
+
+input, select, textarea {
+    background: white;
+    border-radius: 0;
+    width: 100%;
+    font-family: 'GraphikBACondMedium';
+    border: none;
+    display: block;
+    box-sizing: border-box;
+    color: rgba(0,0,0,0.8);
+}
+
+#email {
+    width: 100%;
+    font-size: 21px;
+    padding: 18px 20px;
+}
+
+#page-1 > * {
+    float: right;
+}
+
+#page-1 .content {
+    float: none;
+}
+
+.submit {
+    background: #ee2e00;
+    color: white;
+    text-align: center;
+    line-height: 1;
+}
+
+#page-1 .submit {
+    font-size: 30px;
+    padding: 16px;
+    text-transform: uppercase;
+}
+
+#page-1 input {
+    box-shadow: 3px 3px 0 0 rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+}
+
+#page-1 .content2 {
+    width: 430px;
+    font-family: 'GraphikLight';
+    font-size: 16px;
+    line-height: 28px;
+    margin: 0.5em 0 1.5em;
+    padding-right: 10px;
+}
+
+#page-1 .content2 strong {
+    font-weight: 400;
+    font-family: 'GraphikMedium';
+}
+
+#page-1 .content2  ul {
+    margin: 0;
+    padding-left: 15px;
+}
+
+#page-1 .content {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-family: 'GraphikBACondMedium';
+    font-size: 24px;
+    line-height: 26px;
+    position: absolute;
+    width: 470px;
+    box-sizing: border-box;
+    padding: 30px;
+    left: 0;
+    top: 482px;
+    text-align: center;
+    letter-spacing: 2.4px;
+}
+
+#page-1 .content .date {
+    font-family: 'GraphikBACondBold';
+    color: #ee2e00;
+    font-weight: 400;
+}
+
+
+#page-1 .bonus {
+    color: #ee2e00;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    width: 420px;
+    padding: 23px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,0.5);
+    font-family: 'GraphikBACondMedium';
+    margin-right: 19px;
+}
+
+footer {
+    background: black;
+    color: white;
+    padding: 25px 45px;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+footer a {
+    color: white;
+}
+
+form {
+    display: block;
+}
+
+@media screen and (max-width: 768px){
+    #page-1 > * {
+        float: none;
+    }
+    #page-1 .head {
+        margin: 26px auto 624px;
+    }
+    #page-1 {
+        height: auto;
+        background: url(../img/bg-mobile.jpg)  center 200px no-repeat;
+        background-size: 100% auto;
+    }
+    #page-1 .content {
+        top: 523px;
+        width: 100%;
+        font-size: 32px;
+        line-height: 42px;
+        padding-left: 0;
+        padding-right: 0;
+        letter-spacing: 1px;
+    }
+    #page-1 h1 {
+        display: none;
+    }
+    .container {
+        width: 100%;
+    }
+    footer {
+        width: 100%;
+    }
+    #form1 {
+        width: 100%;
+        background: #cadef6;
+        padding: 32px 37px;
+        box-sizing: border-box;
+        margin: 0;
+    }
+    #email {
+        box-shadow: none!important;
+        border: 3px solid #ccc;
+        font-size: 42px;
+        padding: 26px 30px 24px;
+    }
+    #page-1 .submit {
+        font-size: 54px;
+        line-height: 56px;
+        padding: 28px 0 24px;
+        box-shadow: 3px 3px 0 0 rgba(0,0,0,0.3);
+        margin: 0;
+    }
+    #page-1 .content2 {
+        width: 100%;
+        font-size: 28px;
+        line-height: 40px;
+        text-align: center;
+        padding: 40px 60px;
+        box-sizing: border-box;
+        margin-bottom: 0;
+    }
+    #page-1 .content2 ul li {
+        margin: 0.5em 0;
+    }
+    .bonus-wrapper {
+        background: #cadef6;
+        padding: 30px 36px;
+        box-sizing: border-box;
+    }
+    #page-1 .bonus {
+        width: 100%;
+        font-size: 32px;
+        line-height: 42px;
+    }
+    footer {
+        text-align: center;
+        font-size: 24px;
+        line-height: 36px;
+        padding-bottom: 100px;
+    }
+    body {
+        padding-bottom: 0;
+    }
+    .mobile {
+        display: block;
+    }
+}

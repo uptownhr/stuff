@@ -1,7 +1,32 @@
 extends layouts/default
 
 block content
-  form(method="POST" action="/email-exists")
-    label email
-    input(type="email" name="email")
-    input(type="submit")
+  section.container#page-1
+    .head
+      span New Year Self Tone It Up Challenge
+    .clear
+    h1 Join Us!
+    .clear
+    .content
+      | We’ve teamed up with Katrina #[br]
+      | Hodgson and Karena Dawn, the #[br]
+      | insanely popular Tone It Up fitness #[br]
+      | duo, to kick off the ultimate #[br]
+      | fitness challenge on #[span.date January 3].
+    .clear
+    form(method='POST', action='/email-exists', id='form1')
+      input(type='email', name='email', id='email')
+      input(type='submit', class='submit', value='Sign Up Now')
+    .clear
+    .content2
+      strong You’ll get everything you need #[br.mobile] to look &amp; feel your best:
+      ul
+        li 4 weeks of strength training and #[br.mobile] cardio workouts
+        li An easy-to-follow healthy-meal plan #[br.mobile] and shopping list
+        li Access to support and motivation from thousands of other women doing the SELFxTone It Up Challenge
+      .clear
+      .bonus-wrapper
+        .bonus
+          | BONUS: Enter for a chance #[br]
+          | to win a three-night vacation #[br]
+          | (complete with spa treatments) at the luxe Buccaneer Resort in St. Croix!

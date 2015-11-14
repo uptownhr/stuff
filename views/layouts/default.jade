@@ -1,5 +1,17 @@
+doctype html
 html
+  head
+    title='Self Tone It Up New Year Challenge'
+    script(src='/js/viewport.js')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    link(rel='stylesheet', href='/css/normalize.css')
+    link(rel='stylesheet', href='/css/main.css')
   body
     block content
-    script(src='/jquery.js')
-    script(src='/main.js')
+    footer.container
+      | #[a(href='', target='_blank') Condé Nast privacy policy] • #[a(href='', target='_blank') No purchase necessary] #[br]
+      | Copyright © 2015 Condé Nast
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.0.min.js"><\/script>')
+    script(src='/js/main.js')
