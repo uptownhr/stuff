@@ -1,36 +1,48 @@
 extends layouts/default
 
 block content
-  section.container#page-2
-    .head
-      span New Year Self Tone It Up Challenge
-    .clear
-    h2 YOU’RE IN!
-    .content
-      | We’re all starting January 3—you’ll receive a reminder email before #[br]
-      | the Challenge kicks off so you can stock your fridge and get your sneakers #[br]
-      | ready. To enter for a chance to win that beach getaway, sign up below.
-    h2 ENTER NOW
-    .content2 for a chance to win a three-night stay for two at The Buccaneer Resort in St. Croix, spa treatments included!
-    form(method='POST', action='/enter-sweep', id='form2')
-      input(type='text', name='@firstName', placeholder='First Name')
-      input(type='text', name='@lastName', placeholder='Last Name')
-      input(type='text', name='@address1', placeholder='Address')
-      input(type='text', name='@city', placeholder='City')
-      input(type='text', name='@state', placeholder='State')
-      input(type='text', name='@zip', placeholder='Zip')
-      input(type='hidden', name='email', value='#{email}')
-      if exists
-        input(type='submit', class='submit', value='Submit')
-      input(type='checkbox', name='rules', value='1')
-      | By checking this box, I agree to the #[a(href='', target='_blank') official rules]. #[a(href='', target='_blank') No purchase necessary]. #[a(href='', target='_blank') Terms of use] | #[a(href='', target='_blank') Privacy policy]
-      input(type='checkbox', name='optin', value='1')
-      | Receive more information and special offers from The Buccaneer Resort, St. Croix.
-      if !exists
-        h3 Create an account!
-        p
-          | Always stay in the know with the newest topics,#[br]
-          | recipes and workouts to be your best SELF. Be the first to know about#[br]
-          | future SELF Challenges and offers!
-        input(type='password', name='password', placeholder='Password (optional)')
-        input(type='submit', class='submit', value='Submit')
+  if exists
+    section.container#page-2
+  else
+    section.container#page-2.noaccount
+      .head
+        span New Year Self Tone It Up Challenge
+      .clear
+      hr
+      .clear
+      h2 YOU’RE IN!
+      .content
+        | We’re all starting January 3—you’ll receive a reminder email before #[br]
+        | the Challenge kicks off so you can stock your fridge and get your sneakers #[br]
+        | ready. To enter for a chance to win that beach getaway, sign up below.
+      .inner
+        .top
+          h2 ENTER NOW
+          .content2 for a chance to win a three-night stay for two at The Buccaneer Resort in St. Croix, spa treatments included!
+        form(method='POST', action='/enter-sweep', id='form2')
+          .form2-wrapper
+            input(type='text', name='@firstName', placeholder='First Name', id='first-name')
+            input(type='text', name='@lastName', placeholder='Last Name', id='last-name')
+            input(type='text', name='@address1', placeholder='Address', id='address')
+            input(type='text', name='@city', placeholder='City', id='city')
+            input(type='text', name='@state', placeholder='State', id='state')
+            input(type='text', name='@zip', placeholder='Zip', id='zip')
+            input(type='hidden', name='email', value='#{email}')
+            .clear
+            if exists
+              input(type='submit', class='submit', value='Submit')
+            .checkboxes
+              input(type='checkbox', name='rules', value='1', class='checkbox', id='rules')
+              | By checking this box, I agree to the #[a(href='', target='_blank') official rules]. #[a(href='', target='_blank') No purchase necessary]. #[a(href='', target='_blank') Terms of use] | #[a(href='', target='_blank') Privacy policy]
+              .clear
+              input(type='checkbox', name='optin', value='1', class='checkbox')
+              | Receive more information and special offers from The Buccaneer Resort, St. Croix.
+          if !exists
+            h3 Create an account!
+            p.create-account
+              | Always stay in the know with the newest topics,#[br]
+              | recipes and workouts to be your best SELF. Be the first to know about#[br]
+              | future SELF Challenges and offers!
+            .form2-wrapper
+              input(type='password', name='password', placeholder='Password (optional)', id='password')
+              input(type='submit', class='submit', value='Submit')

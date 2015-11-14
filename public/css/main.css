@@ -112,6 +112,7 @@ input, select, textarea {
     display: block;
     box-sizing: border-box;
     color: rgba(0,0,0,0.8);
+    text-transform: uppercase;
 }
 
 #email {
@@ -216,6 +217,120 @@ footer a {
 
 form {
     display: block;
+}
+
+#page-2 .head {
+    width: 141px;
+    margin: 0 auto;
+    height: 113px;
+}
+
+#page-2 hr {
+    width: 298px;
+    border: none;
+    border-top: black 2px solid;
+    margin: 0 auto;
+}
+
+#page-2 h2 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'GraphikBACondMedium';
+    margin: 20px 0 0;
+    line-height: 1;
+    font-weight:  400;
+}
+
+#page-2 .content {
+    font-family: 'GraphikBACondMedium';
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0.4em 0 0.7em;
+}
+
+#page-2 .inner {
+    background: url(../img/bg2.jpg) 0 0 no-repeat;
+    background-size: 100% auto;
+    height: 646px;
+    text-align: center;
+}
+
+#page-2.noaccount .inner {
+    background: url(../img/bg2alt.jpg) 0 0 no-repeat;
+    height: 873px;
+}
+
+#page-2 .inner .top {
+    padding-top: 24px;
+    padding-bottom: 22px;
+    color: white;
+    text-shadow: 3px 3px rgba(0,0,0,.3);
+}
+
+#page-2 .inner .top .content2 {
+    font-size: 28px;
+    line-height: 32px;
+    font-family: 'GraphikBACondMedium';
+    width: 670px;
+    margin: 0.6em auto 1em;
+}
+
+.form2-wrapper {
+    width: 486px;
+    margin: 36px auto 0;
+}
+
+#form2 input {
+    padding: 14px 11px;
+    margin-bottom: 13px;
+    float: left;
+}
+
+#first-name, #city, #state {
+    margin-right: 12px;
+}
+
+#last-name, #first-name {
+    width: 237px;
+}
+
+#city, #state, #zip {
+    width: 154px;
+
+}
+
+#form2 input.checkbox {
+    display: inline-block;
+    width: auto;
+    margin-right: 4px;
+    margin-bottom: 10px;
+}
+
+.checkboxes {
+    text-align: left;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.checkboxes a {
+    color: black;
+}
+
+#page-2 h3 {
+    font-size: 50px;
+    text-shadow: 3px 3px rgba(0,0,0,0.3);
+    font-family: 'GraphikBACondMedium';
+    color: white;
+    font-weight: 400;
+}
+
+p.create-account {
+    text-shadow: 3px 3px rgba(0,0,0,0.3);
+    font-family: 'GraphikBACondMedium';
+    color: white;
+    font-size: 28px;
+    line-height: 32px;
 }
 
 @media screen and (max-width: 768px){
