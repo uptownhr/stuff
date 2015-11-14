@@ -131,7 +131,7 @@ function sweepStake(params){
     let entry = {
       '@address1': params['@address1'],
       '@city': params['@city'],
-      '@countryCode': "US",
+      '@countryCode': 'US',
       '@stateCode': params['@state'],
       '@zipCode': params['@zip'],
       '@firstname': params['@firstName'],
