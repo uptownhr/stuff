@@ -23,6 +23,7 @@ app.use( bodyParser.json() )
 app.listen( process.env.PORT || 3000)
 
 app.get('/', function(req,res){
+  req.session.referer = req.header('Referer');
   res.render('index')
 })
 
@@ -68,23 +69,32 @@ app.post('/enter-sweep', function(req,res){
     body.site = "SLF"
     body.provisionerType = 'amg'
     body.registrationSource = 'CNEE_SLF'
-    api('/service/externalUser/provision', user_req
-    )
-    .then(function(created){
-      console.log('created registration', created)
-    })
-    .catch(function(err){
-      console.log('error registration', err)
-    })
+    api('/service/externalUser/provision', user_req)
+      .then(function(created){
+        console.log('created registration', created)
+      })
+      .catch(function(err){
+        console.log('error registration', err)
+      })
   }
+
+  body.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  body.referer = req.session.referer
+  body.url = 'http://' + req.hostname  + req.url
 
   sweepStake(body)
     .then(function(entered){
-      res.redirect('/thank-you')
+      res.send({
+        code: 200
+      })
+      //res.redirect('/thank-you')
     })
     .catch(function(err){
-      console.log(err)
-      res.redirect('/')
+      //res.redirect('/sweep?error=' + err[0].error['@message'])
+      res.send({
+        code: 400,
+        error: err[0].error
+      })
     })
 })
 
@@ -96,7 +106,7 @@ app.get('/thank-you', function(req,res){
 function api(url, request_param){
   return new Promise(function(resolve, reject){
     let base_api = 'https://stag-cnid.condenastdigital.com'
-    console.log(base_api + url, request_param)
+
     request({
       url: base_api + url,
       method: 'POST',
@@ -118,32 +128,30 @@ function sweepStake(params){
   return new Promise(function(resolve, reject){
     const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
-    params = {
-      '@address1': '1234 wilshire',
-      '@city': 'los angeles',
+    let entry = {
+      '@address1': params['@address1'],
+      '@city': params['@city'],
       '@countryCode': 'US',
-      '@stateCode': 'CA',
-      '@zipCode': '90017',
-      '@firstname': 'James',
-      '@lastname': 'Testing',
-      '@email': 'testing@testing.com'
+      '@stateCode': params['@state'],
+      '@zipCode': params['@zip'],
+      '@firstname': params['@firstName'],
+      '@lastname': params['@lastName'],
+      '@email': params.email
     }
 
-    let entry = params
     entry.entryContext = {
       '@application': 'sweep_batch_upload',
       '@formName': 'self-toneup-challenge',
       '@siteCode': 'SLF',
-      '@ip': '1.1.1.1',
-      '@referer': 'http://google.com',
-      '@url': 'http://localhost'
+      '@ip': params.ip,
+      '@referer': params.referer,
+      '@url': params.url
     }
 
     entry.customFieldValues = {
-      '@sponsor_optin': '',
-      '@accept_terms': ''
+      '@sponsor_optin': params.optin,
+      '@accept_terms': params.rules
     }
-
 
     request({
       url: url,
@@ -157,17 +165,17 @@ function sweepStake(params){
       },*/
       json: {
         sweepstakeEntry: {
-          userEntry: entry,
-          newsletterSubscriptions:{
+          userEntry: entry
+/*          newsletterSubscriptions:{
             newsletterSubscription:[
               {"@newsletterId": "100", "@subscribe": "true"}
             ]
-          }
+          }*/
         }
       }
     }, function(err,res,body){
       if(err) return reject(err)
-      if(res.statusCode != 200 && res.statusCode != 201) return reject(res.statusMessage)
+      if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
 
       resolve(body)
     })
