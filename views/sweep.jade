@@ -20,7 +20,7 @@ block content
       input(type='text', name='@state', placeholder='State')
       input(type='text', name='@zip', placeholder='Zip')
       input(type='hidden', name='email', value='#{email}')
-      if !exists
+      if exists
         input(type='submit', class='submit', value='Submit')
       input(type='checkbox', name='rules', value='1')
       | By checking this box, I agree to the #[a(href='', target='_blank') official rules]. #[a(href='', target='_blank') No purchase necessary]. #[a(href='', target='_blank') Terms of use] | #[a(href='', target='_blank') Privacy policy]
