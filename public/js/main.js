@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
         e.preventDefault();
         
         var email = $('#email').val();
-        if (empty(email)) {
+        if (email=='') {
             alert('Please enter your email');
         } else if (validateEmail(email)) {
             alert('Your email is invalid');
