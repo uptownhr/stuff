@@ -119,6 +119,7 @@ input, select, textarea {
     width: 100%;
     font-size: 21px;
     padding: 18px 20px;
+    text-transform: none;
 }
 
 #page-1 > * {
@@ -200,6 +201,7 @@ input, select, textarea {
     background: rgba(255,255,255,0.5);
     font-family: 'GraphikBACondMedium';
     margin-right: 19px;
+    margin-top: 25px;
 }
 
 footer {
@@ -219,13 +221,13 @@ form {
     display: block;
 }
 
-#page-2 .head {
+#page-2 .head, #page-3 .head {
     width: 141px;
     margin: 0 auto;
     height: 113px;
 }
 
-#page-2 hr {
+hr {
     width: 298px;
     border: none;
     border-top: black 2px solid;
@@ -276,15 +278,24 @@ form {
     margin: 0.6em auto 1em;
 }
 
+#page-2 .submit {
+    font-size: 30px;
+    line-height: 1;
+    height: 49px;
+    padding: 11px 0;
+}
+
 .form2-wrapper {
     width: 486px;
     margin: 36px auto 0;
 }
 
 #form2 input {
-    padding: 14px 11px;
+    padding: 12px 11px 8px;
     margin-bottom: 13px;
     float: left;
+    font-size: 18px;
+    height: 42px;
 }
 
 #first-name, #city, #state {
@@ -297,7 +308,6 @@ form {
 
 #city, #state, #zip {
     width: 154px;
-
 }
 
 #form2 input.checkbox {
@@ -305,6 +315,7 @@ form {
     width: auto;
     margin-right: 4px;
     margin-bottom: 10px;
+    height: auto;
 }
 
 .checkboxes {
@@ -323,6 +334,8 @@ form {
     font-family: 'GraphikBACondMedium';
     color: white;
     font-weight: 400;
+    margin-top: 60px;
+    margin-bottom: 0;
 }
 
 p.create-account {
@@ -331,9 +344,47 @@ p.create-account {
     color: white;
     font-size: 28px;
     line-height: 32px;
+    margin-top: 16px;
+    margin-bottom: 26px;
+}
+
+#page-3 {
+    text-align: center;
+}
+
+#page-3 .content {
+    font-size: 32px;
+    line-height: 38px;
+    font-family: 'GraphikBACondMedium';
+    padding: 40px 0 50px;
+}
+
+#page-3 .social {
+    padding-top: 40px;
+    padding-bottom: 112px;
+    font-family: 'GraphikBACondMedium';
+}
+
+#page-3 .social, #page-3 .social h2 {
+    font-size: 28px;
+    line-height: 32px;
+    color: #f04722;
+    font-weight: 400;
+}
+
+#page-3 .social a {
+    color: #f04722;
+    margin: 0 40px;
+}
+
+#page-3 .social h2 {
+    margin-bottom: 64px;
 }
 
 @media screen and (max-width: 768px){
+    .desktop {
+        display: none;
+    }
     #page-1 > * {
         float: none;
     }
@@ -404,6 +455,7 @@ p.create-account {
         width: 100%;
         font-size: 32px;
         line-height: 42px;
+        margin: 0;
     }
     footer {
         text-align: center;
@@ -416,5 +468,104 @@ p.create-account {
     }
     .mobile {
         display: block;
+    }
+    #page-2 .head, #page-3 .head {
+        height: 224px;
+        width: 301px;
+    }
+    #page-2 .content {
+        padding: 0 35px 18px;
+        text-align: left;
+    }
+    #page-2 .inner, #page-2 .inner h2, #page-2 h3 {
+        text-align: left;
+    }
+    #page-2 .inner {
+        padding: 0 35px;
+        box-sizing: border-box;
+    }
+    #page-2 .inner .top .content2 {
+        width: 100%;
+        line-height: 42px;
+    }
+    #first-name, #last-name, #city, #state, #zip {
+        width: 100%;
+    }
+    #page-2 .inner .top {
+        background: rgba(0,0,0,0.3);
+        padding-left: 35px;
+        padding-right: 35px;
+        box-sizing: content-box;
+        width: 100%;
+        margin-left: -35px;
+        margin-bottom: 40px;
+        padding-bottom: 0.1em;
+    }
+    #page-2 .inner .top h2 {
+        margin-top: 12px;
+        margin-bottom: 2px;
+    }
+    #page-2 .inner {
+        background: url(../img/bg2-mobile.jpg) 0 0 no-repeat;
+        background-size: 100% 100%;
+        height: 1236px;
+    }
+    .form2-wrapper {
+        width: 100%;
+        margin-top: 12px;
+    }
+    input {
+        text-transform: none;
+    }
+    #form2 input {
+        border: 1px solid rgba(0,0,0,0.33);
+        font-size: 42px;
+        height: 85px;
+        padding-left: 34px;
+        padding-right: 34px;
+    }
+    #form2 .submit {
+        height: 97px;
+        font-size: 54px;
+        padding: 5px 0 0;
+        border: none;
+        box-shadow: 3px 3px 0 0 rgba(0,0,0,0.3);
+    }
+    .checkboxes {
+        font-size: 26px;
+        line-height: 36px;
+        margin-top: 0.8em;
+    }
+    #form2 input.checkbox {
+        margin-top: 12px;
+    }
+    .checkboxes .clear {
+        height: 1em;
+    }
+    .checkboxes input {
+        float: left;
+    }
+    .checkboxes label {
+        float: right;
+        display: block;
+        width: 95%
+    }
+    #page-2.noaccount .inner {
+        background: url(../img/bg2alt-mobile.jpg) 0 0 no-repeat;
+        background-size: 100% 100%;
+        height: 1686px;
+    }
+    #page-2 h3 {
+        margin-top: 1.2em;
+    }
+    #page-3 .content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    #page-3 .social {
+        padding-bottom: 200px;
+    }
+    footer {
+        height: 320px;
     }
 }

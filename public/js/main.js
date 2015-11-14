@@ -38,9 +38,13 @@ jQuery(document).ready(function($){
             console.log($('#form2').serialize())
             $.post('/enter-sweep', $('#form2').serialize(), function(res){
                 if (res.code == '200') {
-                   $('#form2').submit();
+                   location.href = '/thank-you'
                 } else if (res.code == '400') {
-                    alert("Something went wrong.");
+                    if (res.error['@code'] == 'error.invalid.zipCode') {
+                        alert ("Please enter a valid zip code.")
+                    } else if (res.error['@code'] == 'error.required.state') {
+                        alert ("Please enter a valid state in XX format.")
+                    }
                 }
             });
         }
