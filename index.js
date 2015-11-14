@@ -64,13 +64,11 @@ app.post('/enter-sweep', function(req,res){
   let body = req.body
 
   if(body.password){
-    api('/service/externalUser/provision', {
-      "email": body.email,
-      "password": body.password,
-      "address1": body['@address1'],
-      "site": "SLF",
-      "provisionerType": "amg",
-      "registrationSource": "CNEE_SLF"}
+    let user_req = body
+    body.site = "SLF"
+    body.provisionerType = 'amg'
+    body.registrationSource = 'CNEE_SLF'
+    api('/service/externalUser/provision', user_req
     )
     .then(function(created){
       console.log('created registration', created)

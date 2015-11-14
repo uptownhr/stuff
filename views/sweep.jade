@@ -1,0 +1,11 @@
+extends ./layouts/default
+
+block content
+  form(method="POST" action="/enter-sweep")
+    label Address
+    input(type="text" name="@address1")
+    input(type="hidden" name="email" value="#{email}")
+    if !exists
+      label Password
+      input(type="password" name="password" placeholder="optional")
+    input(type="submit")

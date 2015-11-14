@@ -1,0 +1,7 @@
+extends layouts/default
+
+block content
+  form(method="POST" action="/email-exists")
+    label email
+    input(type="email" name="email")
+    input(type="submit")
