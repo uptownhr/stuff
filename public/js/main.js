@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
         var email = $('#email').val();
         if (email=='') {
             alert('Please enter your email');
-        } else if (validateEmail(email)) {
+        } else if (!validateEmail(email)) {
             alert('Your email is invalid');
         } else{
             $('#form1').submit();
