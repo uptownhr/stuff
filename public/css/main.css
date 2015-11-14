@@ -61,10 +61,6 @@ body {
     position: relative;
 }
 
-#page-2, #page-3 {
-    display: none;
-}
-
 .head {
     background: url(../img/header.png) center center no-repeat;
     background-size: 100% auto;
