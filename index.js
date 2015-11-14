@@ -1,10 +1,15 @@
 "use strict"
 const request = require('request'),
   express = require('express'),
+  session = require('express-session'),
   bodyParser = require('body-parser'),
   provisionerType = 'amg'
 
 let app = express()
+app.use( session({ secret: 'asdfasdf'}) )
+app.set('view engine', 'jade')
+app.set('views', './views')
+
 app.use( bodyParser.json() )
   .use( bodyParser.urlencoded({extended: true}) )
   .use( function(err, req, res, next){
@@ -17,35 +22,76 @@ app.use( bodyParser.json() )
 
 app.listen( process.env.PORT || 3000)
 
+app.get('/', function(req,res){
+  res.render('index')
+})
+
 app.post('/email-exists', function(req,res){
   let email = req.body.email
-  console.log(req.body)
 
   if( !email || email.length < 1 ) return res.status(400).send('bad email')
+  req.session.email = email
 
   api( '/service/externalUser/doesUserExist', {email: email, provisionerType: provisionerType})
     .then( function(user){
-      console.log(user['@email'], user)
-      if(user == 'not found'){
-        res.status(400).send(user)
+      req.session.user = user
+      if(user != 'not found') {
+        req.session.user = user
       }else{
-        res.send(user)
+        req.session.user = null
       }
+
+      res.redirect('/sweep')
     })
     .catch( function(err){
-      res.status(400).send(err)
+      req.session.user = ''
+      res.redirect('/')
     })
+})
+
+app.get('/sweep', function(req, res){
+  let email = req.session.email
+
+  if( !email ) res.redirect('/')
+
+  res.render('sweep', {
+    email: req.session.email,
+    exists: (req.session.user && req.session.user.exists)
+  })
 })
 
 app.post('/enter-sweep', function(req,res){
   let body = req.body
-  sweepStake(body)
-    .then(function(entered){
-      res.send(entered)
+
+  if(body.password){
+    api('/service/externalUser/provision', {
+      "email": body.email,
+      "password": body.password,
+      "address1": body['@address1'],
+      "site": "SLF",
+      "provisionerType": "amg",
+      "registrationSource": "CNEE_SLF"}
+    )
+    .then(function(created){
+      console.log('created registration', created)
     })
     .catch(function(err){
-      res.status(400).send(err)
+      console.log('error registration', err)
     })
+  }
+
+  sweepStake(body)
+    .then(function(entered){
+      res.redirect('/thank-you')
+    })
+    .catch(function(err){
+      console.log(err)
+      res.redirect('/')
+    })
+})
+
+app.get('/thank-you', function(req,res){
+  res.render('thank-you')
 })
 
 
@@ -63,7 +109,7 @@ function api(url, request_param){
       json: request_param
     }, function(err,res,body){
       if(err) return reject(err)
-      if(res.statusCode != 200) return reject(res.statusMessage)
+      if(res.statusCode != 200) return resolve(res.statusMessage)
 
       resolve(body)
     })
@@ -88,29 +134,42 @@ function sweepStake(params){
     let entry = params
     entry.entryContext = {
       '@application': 'sweep_batch_upload',
-      '@formName': 'testform',
-      '@siteCode': 'testcode',
+      '@formName': 'self-toneup-challenge',
+      '@siteCode': 'SLF',
       '@ip': '1.1.1.1',
       '@referer': 'http://google.com',
       '@url': 'http://localhost'
+    }
+
+    entry.customFieldValues = {
+      '@sponsor_optin': '',
+      '@accept_terms': ''
     }
 
 
     request({
       url: url,
       method: 'POST',
-      oauth: {
+      headers:{
+        key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
+      },
+      /*oauth: {
         consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
         consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
-      },
+      },*/
       json: {
         sweepstakeEntry: {
-          userEntry: entry
+          userEntry: entry,
+          newsletterSubscriptions:{
+            newsletterSubscription:[
+              {"@newsletterId": "100", "@subscribe": "true"}
+            ]
+          }
         }
       }
     }, function(err,res,body){
       if(err) return reject(err)
-      if(res.statusCode != 200) return reject(res.statusMessage)
+      if(res.statusCode != 200 && res.statusCode != 201) return reject(res.statusMessage)
 
       resolve(body)
     })
@@ -118,21 +177,14 @@ function sweepStake(params){
 }
 
 function apiCreateUser(){
-  let requestObject = requestConfigObject();
-  createSpacer();
-  console.log("Actual user creation");
-  requestObject.url = cnidAssembledBaseUrl + "/service/externalUser/provision";
-  requestObject.method = "POST";
-  requestObject.json = {"email":uuid.v4() +"@testnewyorker.com",
+  api('/service/externalUser/provision', {"email":uuid.v4() +"@testnewyorker.com",
     "password": "123123", "site":"SLF", "provisionerType":"amg",
     "address1":"1166 Sixth Ave",
-    "registrationSource":"CNEE_SLF"};
+    "registrationSource":"CNEE_SLF"} )
 
-  console.log("Request for user creation");
-  console.dir(requestObject);
   request(requestObject, function(error, response, rawResponse){
     console.log("Response for user creation call");
-    amgUuid = response.body.externalId;
+    let amgUuid = response.body.externalId;
     console.dir(rawResponse);
     setTimeout(function(){performAPILogin();}, 1000);
   });
