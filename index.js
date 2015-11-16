@@ -164,7 +164,7 @@ function sweepStake(params){
           }*/
         }
       }
-    }
+    
     
     console.log(url, json)
     request({
@@ -178,10 +178,11 @@ function sweepStake(params){
         consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
       },*/
       json: json, function(err,res,body){
-      if(err) return reject(err)
-      if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
+        if(err) return reject(err)
+          if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
 
-      resolve(body)
+            resolve(body)
+      }
     })
   })
 }
