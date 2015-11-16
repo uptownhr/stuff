@@ -31,10 +31,12 @@ block content
             input(type='submit', class='submit', value='SIGN UP NOW')
           .clear
           .checkboxes
-            input(type='checkbox', name='rules', value='1', class='checkbox', id='rules')
+            .checkbox(data-field='rules')
+            input(type='hidden', name='rules', value='0', id='rules')
             label By checking this box, I agree to the #[a(href='', target='_blank') #[br.mobile] official rules]. #[a(href='', target='_blank') No purchase necessary].#[br.mobile] #[a(href='', target='_blank') Terms of use] | #[a(href='', target='_blank') Privacy policy]
             .clear
-            input(type='checkbox', name='optin', value='1', class='checkbox')
+            .checkbox(data-field='optin')
+            input(type='hidden', name='optin', value='0', id='optin')
             label Receive more information and special offers from The Buccaneer Resort, St. Croix.
         .clear
         if !exists

@@ -24,18 +24,20 @@ jQuery(document).ready(function($){
         var state = $('#state').val();
         var zip = $('#zip').val();
         var password = $('#password').val();
-        var rules = $('#rules:checked').length;
-        var optin = $('#optin:checked').val();
+        var rules = $('#rules').val();
+        var optin = $('#optin').val();
         var email = $('input[name="email"]').val();
         
-        if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
+        
+        if (password!=undefined) {
+            if (password.length > 0 && password.length < 6) {
+                alert('Your password must be at least 6 characters.');
+            } 
+        } else if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
             alert('Please fill out your full address.');
-        } else if (password.length > 0 && password.length < 6) {
-            alert('Your password must be at least 6 characters.');
-        } else if (!rules) {
+        } else if (rules!='1') {
             alert('You must agree to the rules to enter the sweepstakes.');
         } else {
-            console.log($('#form2').serialize())
             $.post('/enter-sweep', $('#form2').serialize(), function(res){
                 if (res.code == '200') {
                    location.href = '/thank-you'
@@ -49,6 +51,16 @@ jQuery(document).ready(function($){
             });
         }
         
+    });
+    
+    $('.checkbox').click(function(){
+        $(this).toggleClass('hit');
+        field = $(this).attr('data-field');
+        if ($(this).hasClass('hit')){
+            $('input[name="'+field+'"]').val('1');
+        } else {
+            $('input[name="'+field+'"]').val('0'); 
+        }
     });
 
 });

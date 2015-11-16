@@ -7,12 +7,13 @@ block content
     .clear
     h1 Join Us!
     .clear
-    .content
-      | We’ve teamed up with Katrina #[br]
-      | Hodgson and Karena Dawn, the #[br]
-      | insanely popular Tone It Up fitness #[br]
-      | duo, to kick off the ultimate #[br]
-      | fitness challenge on #[span.date January 3].
+    .content-wrapper
+      .content
+        | We’ve teamed up with Katrina #[br]
+        | Hodgson and Karena Dawn, the #[br]
+        | insanely popular Tone It Up fitness #[br]
+        | duo, to kick off the ultimate #[br]
+        | fitness challenge on #[span.date January 3].
     .clear
     form(method='POST', action='/email-exists', id='form1')
       input(type='email', name='email', id='email', placeholder='Enter your email address')
@@ -23,7 +24,7 @@ block content
       ul
         li 4 weeks of strength training and #[br.mobile] cardio workouts
         li An easy-to-follow healthy-meal plan #[br.mobile] and shopping list
-        li Access to support and motivation from thousands of other women doing the SELFxTone It Up Challenge
+        li Access to support and motivation from thousands of other women doing the #[strong SELFxTone It Up Challenge]
     .clear
     .bonus-wrapper
       .bonus
