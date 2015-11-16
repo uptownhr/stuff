@@ -17,6 +17,7 @@ jQuery(document).ready(function($){
     $('#form2 .submit').click(function(e){
         e.preventDefault();
         
+        
         var first_name = $('#first-name').val();
         var last_name = $('#last-name').val();
         var address = $('#address').val();
@@ -27,13 +28,15 @@ jQuery(document).ready(function($){
         var rules = $('#rules').val();
         var optin = $('#optin').val();
         var email = $('input[name="email"]').val();
-        
+
         
         if (password!=undefined) {
             if (password.length > 0 && password.length < 6) {
                 alert('Your password must be at least 6 characters.');
-            } 
-        } else if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
+            }
+        }
+        
+        if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
             alert('Please fill out your full address.');
         } else if (rules!='1') {
             alert('You must agree to the rules to enter the sweepstakes.');
