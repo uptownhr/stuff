@@ -291,7 +291,7 @@ hr {
     margin: 36px auto 0;
 }
 
-#form2 input {
+#form2 input, #form2 select {
     padding: 12px 11px 8px;
     margin-bottom: 13px;
     float: left;
@@ -309,6 +309,7 @@ hr {
 
 #city, #state, #zip {
     width: 154px;
+    display: block;
 }
 
 .checkbox {

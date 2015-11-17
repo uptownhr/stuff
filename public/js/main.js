@@ -16,7 +16,6 @@ jQuery(document).ready(function($){
 
     $('#form2 .submit').click(function(e){
         e.preventDefault();
-
         var first_name = $('#first-name').val();
         var last_name = $('#last-name').val();
         var address = $('#address').val();
@@ -48,7 +47,6 @@ jQuery(document).ready(function($){
           }
         }).fail( console.log );
       }
-        
     });
     
     $('.checkbox').click(function(){
