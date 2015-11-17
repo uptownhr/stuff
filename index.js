@@ -104,9 +104,10 @@ app.get('/thank-you', function(req,res){
 
 
 function api(url, request_param){
-  console.log(url, request_param)
   return new Promise(function(resolve, reject){
     let base_api = 'https://stag-cnid.condenastdigital.com'
+
+    console.log(base_api + url, JSON.stringify(request_param) )
 
     request({
       url: base_api + url,
@@ -166,7 +167,7 @@ function sweepStake(params){
     }
     
 
-    console.log(url, json)
+    console.log(url, JSON.stringify(json) )
     request({
         url: url,
         method: 'POST',
