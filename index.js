@@ -104,9 +104,10 @@ app.get('/thank-you', function(req,res){
 
 
 function api(url, request_param){
-  console.log(url, request_param)
   return new Promise(function(resolve, reject){
     let base_api = 'https://stag-cnid.condenastdigital.com'
+
+    console.log(base_api + url, JSON.stringify(request_param) )
 
     request({
       url: base_api + url,
@@ -127,7 +128,7 @@ function api(url, request_param){
 
 function sweepStake(params){
   return new Promise(function(resolve, reject){
-    const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
+    const url = 'https://user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
     let entry = {
       '@address1': params['@address1'],
@@ -135,8 +136,8 @@ function sweepStake(params){
       '@countryCode': 'US',
       '@stateCode': params['@state'],
       '@zipCode': params['@zip'],
-      '@firstname': params['@firstName'],
-      '@lastname': params['@lastName'],
+      '@firstName': params['@firstName'],
+      '@lastName': params['@lastName'],
       '@email': params.email
     }
 
@@ -149,10 +150,22 @@ function sweepStake(params){
       '@url': params.url
     }
 
-    entry.customFieldValues = {
-      '@sponsor_optin': params.optin,
-      '@accept_terms': params.rules
-    }
+    entry.customFieldValues = [
+      {
+        'customFieldValue': {
+          '@name': 'optin',
+          '@value': params.optin? 'true': 'false',
+          '@type': 'TEXT'
+        }
+      },
+      {
+        'customFieldValue': {
+          '@name': 'rules',
+          '@value': params.rules? 'true': 'false',
+          '@type': 'TEXT'
+        }
+      }
+    ]
 
     let json = {
       sweepstakeEntry: {
@@ -165,40 +178,26 @@ function sweepStake(params){
       }
     }
     
-    
-    console.log(url, json)
+
+    console.log(url, JSON.stringify(json) )
     request({
-      url: url,
-      method: 'POST',
-      headers:{
-        key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
+        url: url,
+        method: 'POST',
+        headers: {
+          key: 'JezBoyaQZaYXeEP6KCPnOcz1mP0='
+        },
+        /*oauth: {
+         consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
+         consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
+         },*/
+        json: json
       },
-      /*oauth: {
-        consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
-        consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
-      },*/
-      json: json,
       function(err,res,body){
         if(err) return reject(err)
         if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
 
         resolve(body)
       }
-    })
+    )
   })
 }
-
-function apiCreateUser(){
-  api('/service/externalUser/provision', {"email":uuid.v4() +"@testnewyorker.com",
-    "password": "123123", "site":"SLF", "provisionerType":"amg",
-    "address1":"1166 Sixth Ave",
-    "registrationSource":"CNEE_SLF"} )
-
-  request(requestObject, function(error, response, rawResponse){
-    console.log("Response for user creation call");
-    let amgUuid = response.body.externalId;
-    console.dir(rawResponse);
-    setTimeout(function(){performAPILogin();}, 1000);
-  });
-
-};
