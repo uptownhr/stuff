@@ -49,6 +49,8 @@ jQuery(document).ready(function($){
                         alert ("Please enter a valid zip code.")
                     } else if (res.error['@code'] == 'error.required.state') {
                         alert ("Please enter a valid state in XX format.")
+                    } else {
+                        alert("Something went wrong");
                     }
                 }
             });
