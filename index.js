@@ -189,18 +189,3 @@ function sweepStake(params){
     )
   })
 }
-
-function apiCreateUser(){
-  api('/service/externalUser/provision', {"email":uuid.v4() +"@testnewyorker.com",
-    "password": "123123", "site":"SLF", "provisionerType":"amg",
-    "address1":"1166 Sixth Ave",
-    "registrationSource":"CNEE_SLF"} )
-
-  request(requestObject, function(error, response, rawResponse){
-    console.log("Response for user creation call");
-    let amgUuid = response.body.externalId;
-    console.dir(rawResponse);
-    setTimeout(function(){performAPILogin();}, 1000);
-  });
-
-};
