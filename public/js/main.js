@@ -16,8 +16,6 @@ jQuery(document).ready(function($){
 
     $('#form2 .submit').click(function(e){
         e.preventDefault();
-        
-        
         var first_name = $('#first-name').val();
         var last_name = $('#last-name').val();
         var address = $('#address').val();
@@ -29,30 +27,26 @@ jQuery(document).ready(function($){
         var optin = $('#optin').val();
         var email = $('input[name="email"]').val();
 
-        
-        
-        if (password!=undefined && password.length > 0 && password.length < 6) {
-            alert('Your password must be at least 6 characters.');
-        } else if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
-            alert('Please fill out your full address.');
-        } else if (rules!='1') {
-            alert('You must agree to the rules to enter the sweepstakes.');
-        } else {
-            $.post('/enter-sweep', $('#form2').serialize(), function(res){
-                if (res.code == '200') {
-                   location.href = '/thank-you'
-                } else if (res.code == '400') {
-                    if (res.error['@code'] == 'error.invalid.zipCode') {
-                        alert ("Please enter a valid zip code.")
-                    } else if (res.error['@code'] == 'error.required.state') {
-                        alert ("Please enter a valid state in XX format.")
-                    } else {
-                        alert("Something went wrong");
-                    }
-                }
-            });
-        }
-        
+      if (password!=undefined && password.length > 0 && password.length < 6) {
+        alert('Your password must be at least 6 characters.');
+
+      } else if (first_name=='' || last_name=='' || address=='' || city=='' || state=='' || zip=='') {
+        alert('Please fill out your full address.');
+      } else if (rules!='1') {
+        alert('You must agree to the rules to enter the sweepstakes.');
+      } else {
+        $.post('/enter-sweep', $('#form2').serialize(), function(res){
+          if (res.code == '200') {
+            location.href = '/thank-you'
+          } else if (res.code == '400') {
+            if (res.error['@code'] == 'error.invalid.zipCode') {
+              alert ("Please enter a valid zip code.")
+            } else if (res.error['@code'] == 'error.required.state') {
+              alert ("Please enter a valid state in XX format.")
+            }
+          }
+        }).fail( console.log );
+      }
     });
     
     $('.checkbox').click(function(){
