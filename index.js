@@ -35,6 +35,7 @@ app.post('/email-exists', function(req,res){
 
   api( '/service/externalUser/doesUserExist', {email: email, provisionerType: provisionerType})
     .then( function(user){
+      console.log('check user response', user)
       req.session.user = user
       if(user != 'not found') {
         req.session.user = user
@@ -48,6 +49,21 @@ app.post('/email-exists', function(req,res){
       req.session.user = ''
       res.redirect('/')
     })
+
+
+  /*
+  request params for news letter
+   */
+  let params = {
+    ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+    referer: req.session.referer,
+    url: 'http://' + req.hostname,
+    email: email
+  }
+
+  newsletter(params).then( function(res){
+    console.log('newsletter response', res)
+  })
 })
 
 app.get('/sweep', function(req, res){
@@ -71,7 +87,7 @@ app.post('/enter-sweep', function(req,res){
     body.registrationSource = 'CNEE_SLF'
     api('/service/externalUser/provision', user_req)
       .then(function(created){
-        console.log('created registration', created)
+        console.log('registration response', created)
       })
       .catch(function(err){
         console.log('error registration', err)
@@ -87,10 +103,8 @@ app.post('/enter-sweep', function(req,res){
       res.send({
         code: 200
       })
-      //res.redirect('/thank-you')
     })
     .catch(function(err){
-      //res.redirect('/sweep?error=' + err[0].error['@message'])
       res.send({
         code: 400,
         error: err[0].error
@@ -179,7 +193,7 @@ function sweepStake(params){
         userEntry: entry,
         newsletterSubscriptions:{
           newsletterSubscription:[
-          {"@newsletterId": "248719", "@subscribe": "true"}
+            {"@newsletterId": "248721", "@subscribe": "true"}
           ]
         }
       }
@@ -197,6 +211,50 @@ function sweepStake(params){
          consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
          consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
          },*/
+        json: json
+      },
+      function(err,res,body){
+        console.log('sweepstake response', body)
+        if(err) return reject(err)
+        if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
+
+        resolve(body)
+      }
+    )
+  })
+}
+
+function newsletter(params){
+  return new Promise(function(resolve, reject) {
+    const url = 'https://user-service.condenastdigital.com/open/newsletter/entries'
+
+    let json = {
+      "newsletterSubscriptionsRequest":{
+        "@email":params.email,
+        "entryContext":{
+          '@application': 'sweep_batch_upload',
+          '@formName': 'self-toneup-challenge',
+          '@siteCode': 'SLF',
+          "@ip": params.ip,
+          "@referer": params.referer,
+          "@url": params.url
+        },
+        "newsletterSubscriptions":{
+          "newsletterSubscription":[
+            {"@newsletterId":"248719","@subscribe":"true"}
+          ]
+        }
+      }
+    }
+
+    console.log(url, JSON.stringify(json) )
+
+    request({
+        url: url,
+        method: 'POST',
+        headers: {
+          key: 'JezBoyaQZaYXeEP6KCPnOcz1mP0='
+        },
         json: json
       },
       function(err,res,body){
