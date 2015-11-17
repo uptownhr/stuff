@@ -105,7 +105,7 @@ app.get('/thank-you', function(req,res){
 
 function api(url, request_param){
   return new Promise(function(resolve, reject){
-    let base_api = 'https://stag-cnid.condenastdigital.com'
+    let base_api = 'https://cnid.condenastdigital.com'
 
     console.log(base_api + url, JSON.stringify(request_param) )
 
@@ -113,8 +113,8 @@ function api(url, request_param){
       url: base_api + url,
       method: 'POST',
       oauth: {
-        consumer_key: '4ffd9314-37dd-4293-b3ba-903df5a5d0dd',
-        consumer_secret: 'f5c99d6b-5154-4e3d-b14e-01c38304eada'
+        consumer_key: '967d4a75-7565-4000-ba8f-99a2ba94e6ae',
+        consumer_secret: 'e3351359-bf79-49ac-b145-8c1da1a86224'
       },
       json: request_param
     }, function(err,res,body){
@@ -128,7 +128,7 @@ function api(url, request_param){
 
 function sweepStake(params){
   return new Promise(function(resolve, reject){
-    const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
+    const url = 'https://user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
     let entry = {
       '@address1': params['@address1'],
@@ -136,8 +136,8 @@ function sweepStake(params){
       '@countryCode': 'US',
       '@stateCode': params['@state'],
       '@zipCode': params['@zip'],
-      '@firstname': params['@firstName'],
-      '@lastname': params['@lastName'],
+      '@firstName': params['@firstName'],
+      '@lastName': params['@lastName'],
       '@email': params.email
     }
 
@@ -150,19 +150,38 @@ function sweepStake(params){
       '@url': params.url
     }
 
-    entry.customFieldValues = {
-      '@sponsor_optin': params.optin,
-      '@accept_terms': params.rules
-    }
+    entry.customFieldValues = [
+      {
+        'customFieldValue': {
+          '@name': 'optin',
+          '@value': params.optin? 'true': 'false',
+          '@type': 'TEXT'
+        }
+      },
+      {
+        'customFieldValue': {
+          '@name': 'rules',
+          '@value': 'true',
+          '@type': 'TEXT'
+        }
+      },
+      {
+        'customFieldValue': {
+          '@name': '3rdpartyid',
+          '@value': '248721',
+          '@type': 'TEXT'
+        }
+      }
+    ]
 
     let json = {
       sweepstakeEntry: {
-        userEntry: entry
-        /*          newsletterSubscriptions:{
-         newsletterSubscription:[
-         {"@newsletterId": "100", "@subscribe": "true"}
-         ]
-         }*/
+        userEntry: entry,
+        newsletterSubscriptions:{
+          newsletterSubscription:[
+          {"@newsletterId": "248719", "@subscribe": "true"}
+          ]
+        }
       }
     }
     
@@ -172,7 +191,7 @@ function sweepStake(params){
         url: url,
         method: 'POST',
         headers: {
-          key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
+          key: 'JezBoyaQZaYXeEP6KCPnOcz1mP0='
         },
         /*oauth: {
          consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',

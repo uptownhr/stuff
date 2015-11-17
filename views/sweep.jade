@@ -23,8 +23,8 @@ block content
           input(type='text', name='@lastName', placeholder='Last Name', id='last-name')
           input(type='text', name='@address1', placeholder='Address', id='address')
           input(type='text', name='@city', placeholder='City', id='city')
-          | <select name='@state' id='state' placeholder='State'>
-          | <option value=""></option>
+          | <select name='@state' id='state'>
+          | <option value="" default>State</option>
           | <option value="AK">AK</option>
           | <option value="AL">AL</option>
           | <option value="AR">AR</option>
@@ -86,7 +86,7 @@ block content
           .checkboxes
             .checkbox(data-field='rules')
             input(type='hidden', name='rules', value='0', id='rules')
-            label By checking this box, I agree to the #[a(href='', target='_blank') #[br.mobile] official rules]. #[a(href='', target='_blank') No purchase necessary].#[br.mobile] #[a(href='', target='_blank') Terms of use] | #[a(href='', target='_blank') Privacy policy]
+            label By checking this box, I agree to the #[a(href='/rules.pdf', target='_blank') #[br.mobile] official rules]. #[a(href='/rules.pdf', target='_blank') No purchase necessary].#[br.mobile] #[a(href='/rules.pdf', target='_blank') Terms of use] | #[a(href='http://www.condenast.com/privacy-policy#privacypolicy', target='_blank') Privacy policy]
             .clear
             .checkbox(data-field='optin')
             input(type='hidden', name='optin', value='0', id='optin')
@@ -101,3 +101,4 @@ block content
           .form2-wrapper
             input(type='password', name='password', placeholder='Password (optional)', id='password')
             input(type='submit', class='submit', value='SIGN UP NOW')
+    .clear

@@ -395,6 +395,10 @@ p.create-account {
     margin-bottom: 64px;
 }
 
+#state {
+    color: #919191;
+}
+
 @media screen and (max-width: 768px){
     .desktop {
         display: none;
@@ -404,6 +408,9 @@ p.create-account {
     }
     #page-1 .head {
         margin: 26px auto 30px;
+        margin: 15px auto 17px;
+        width: 169px;
+        height: 95px;
     }
     #page-1 {
         height: auto;
@@ -414,15 +421,17 @@ p.create-account {
         background-size: cover;
         position: relative;
         height: 527px;
+        height: 302px;
     }
     #page-1 .content {
         top: auto;
         bottom: 0;
         width: 100%;
         font-size: 32px;
+        font-size: 18px;
         line-height: 42px;
-        padding-left: 0;
-        padding-right: 0;
+        line-height: 24px;
+        padding: 15px 0;
         letter-spacing: 1px;
     }
     #page-1 h1 {
@@ -438,6 +447,7 @@ p.create-account {
         width: 100%;
         background: #cadef6;
         padding: 32px 37px;
+        padding: 18px 21px;
         box-sizing: border-box;
         margin: 0;
     }
@@ -445,21 +455,30 @@ p.create-account {
         box-shadow: none!important;
         border: 3px solid #ccc;
         font-size: 42px;
+        font-size: 24px;
         padding: 26px 30px 24px;
+        padding: 15px 17px 14px;
     }
     #page-1 .submit {
         font-size: 54px;
+        font-size: 26px;
         line-height: 56px;
+        line-height: 23px;
         padding: 28px 0 24px;
+        padding: 16px 0 14px;
         box-shadow: 3px 3px 0 0 rgba(0,0,0,0.3);
+        box-shadow: 2px 2px 0 0 rgba(0,0,0,0.3);
         margin: 0;
     }
     #page-1 .content2 {
         width: 100%;
         font-size: 28px;
+        font-size: 14px;
         line-height: 40px;
+        line-height: 20px;
         text-align: center;
         padding: 40px 60px;
+        padding: 23px 34px;
         box-sizing: border-box;
         margin-bottom: 0;
     }
@@ -469,19 +488,25 @@ p.create-account {
     .bonus-wrapper {
         background: #cadef6;
         padding: 30px 36px;
+        padding: 18px 20px;
         box-sizing: border-box;
     }
     #page-1 .bonus {
         width: 100%;
         font-size: 32px;
+        font-size: 18px;
         line-height: 42px;
+        line-height: 24px;
         margin: 0;
     }
     footer {
         text-align: center;
         font-size: 24px;
+        font-size: 14px;
         line-height: 36px;
+        line-height: 20px;
         padding-bottom: 100px;
+        padding-bottom: 56px;
     }
     body {
         padding-bottom: 0;
@@ -492,22 +517,30 @@ p.create-account {
     #page-2 .head, #page-3 .head {
         height: 224px;
         width: 301px;
+        height: 126px;
+        width: 169px;
     }
     #page-2 .content {
         padding: 0 35px 18px;
+        padding: 0 20px 10px;
         text-align: left;
+        font-size: 18px;
+        line-height: 23px;
     }
     #page-2 .inner, #page-2 .inner h2, #page-2 h3 {
         text-align: left;
     }
     #page-2 .inner {
         padding: 0 35px;
+        padding: 0 20px;
         box-sizing: border-box;
     }
     #page-2 .inner .top .content2 {
         width: 100%;
         line-height: 42px;
         font-size: 32px;
+        line-height: 24px;
+        font-size: 18px;
     }
     #first-name, #last-name, #city, #state, #zip {
         width: 100%;
@@ -516,26 +549,34 @@ p.create-account {
         background: rgba(0,0,0,0.3);
         padding-left: 35px;
         padding-right: 35px;
+        padding-left: 20px;
+        padding-right: 20px;
         box-sizing: content-box;
         width: 100%;
         margin-left: -35px;
         margin-bottom: 40px;
         padding-bottom: 0.1em;
+        margin-left: -20px;
+        margin-bottom: 22px;
     }
     #page-2 .inner .top h2 {
         margin-top: 12px;
         margin-bottom: 2px;
+        margin-top: 7px;
+        margin-bottom: 1px;
     }
     #page-2 .inner {
         background: url(../img/bg2-mobile.jpg) 0 0 no-repeat;
         background-size: 100% 100%;
         height: 1236px;
+        height: 804px;
     }
     .form2-wrapper {
         width: 100%;
         margin-top: 12px;
+        margin-top: 7px;
     }
-    input {
+    input, select {
         text-transform: none;
     }
     #form2 input, #form2 select {
@@ -544,24 +585,36 @@ p.create-account {
         height: 85px;
         padding-left: 34px;
         padding-right: 34px;
+        font-size: 24px;
+        height: 48px;
+        padding-left: 19px;
+        padding-right: 19px;
     }
     #form2 .submit {
         height: 97px;
         font-size: 54px;
         padding: 5px 0 0;
+        height: 55px;
+        font-size: 26px;
+        padding: 3px 0 0;
         border: none;
         box-shadow: 3px 3px 0 0 rgba(0,0,0,0.3);
+        box-shadow: 2px 2px 0 0 rgba(0,0,0,0.3);
     }
     .checkboxes {
         font-size: 30px;
         line-height: 40px;
+        font-size: 17px;
+        line-height: 22.5px;
         margin-top: 0.8em;
     }
     .checkbox {
         margin-top: 6px;
         width: 45px;
         height: 45px;
-        
+        margin-top: 3px;
+        width: 25px;
+        height: 25px;
     }
     .checkboxes .clear {
         height: 1em;
@@ -578,6 +631,7 @@ p.create-account {
         background: url(../img/bg2alt-mobile.jpg) 0 0 no-repeat;
         background-size: 100% 100%;
         height: 1686px;
+        height: 948px;
     }
     #page-2 h3 {
         margin-top: 1.2em;
@@ -585,12 +639,16 @@ p.create-account {
     #page-3 .content {
         padding-left: 30px;
         padding-right: 30px;
+        padding-left: 17px;
+        padding-right: 17px;
     }
     #page-3 .social {
         padding-bottom: 200px;
+        padding-bottom: 113px;
     }
     footer {
         height: 320px;
+        height: 180px;
     }
     .checkbox.hit {
         background: white url(../img/checkbox-hit.png) center center no-repeat;
@@ -598,5 +656,10 @@ p.create-account {
     p.create-account {
         font-size: 32px;
         line-height: 40px;
+        font-size: 18px;
+        line-height: 23px;
+    }
+    #page-3 .social a {
+        margin: 0 25px;
     }
 }
