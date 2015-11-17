@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
         } else{
             $('#form1').submit();
         }
-        
+        return false;
     });
 
     $('#form2 .submit').click(function(e){
@@ -47,6 +47,7 @@ jQuery(document).ready(function($){
           }
         }).fail( console.log );
       }
+      return false;
     });
     
     $('.checkbox').click(function(){

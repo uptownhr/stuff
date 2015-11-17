@@ -105,7 +105,7 @@ app.get('/thank-you', function(req,res){
 
 function api(url, request_param){
   return new Promise(function(resolve, reject){
-    let base_api = 'https://stag-cnid.condenastdigital.com'
+    let base_api = 'https://cnid.condenastdigital.com'
 
     console.log(base_api + url, JSON.stringify(request_param) )
 
@@ -113,8 +113,8 @@ function api(url, request_param){
       url: base_api + url,
       method: 'POST',
       oauth: {
-        consumer_key: '4ffd9314-37dd-4293-b3ba-903df5a5d0dd',
-        consumer_secret: 'f5c99d6b-5154-4e3d-b14e-01c38304eada'
+        consumer_key: '967d4a75-7565-4000-ba8f-99a2ba94e6ae',
+        consumer_secret: 'e3351359-bf79-49ac-b145-8c1da1a86224'
       },
       json: request_param
     }, function(err,res,body){
@@ -161,7 +161,14 @@ function sweepStake(params){
       {
         'customFieldValue': {
           '@name': 'rules',
-          '@value': params.rules? 'true': 'false',
+          '@value': 'true',
+          '@type': 'TEXT'
+        }
+      },
+      {
+        'customFieldValue': {
+          '@name': '3rdpartyid',
+          '@value': '248721',
           '@type': 'TEXT'
         }
       }
@@ -169,12 +176,12 @@ function sweepStake(params){
 
     let json = {
       sweepstakeEntry: {
-        userEntry: entry
-        /*          newsletterSubscriptions:{
-         newsletterSubscription:[
-         {"@newsletterId": "100", "@subscribe": "true"}
-         ]
-         }*/
+        userEntry: entry,
+        newsletterSubscriptions:{
+          newsletterSubscription:[
+          {"@newsletterId": "248719", "@subscribe": "true"}
+          ]
+        }
       }
     }
     
