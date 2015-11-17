@@ -128,7 +128,7 @@ function api(url, request_param){
 
 function sweepStake(params){
   return new Promise(function(resolve, reject){
-    const url = 'https://stag-user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
+    const url = 'https://user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
     let entry = {
       '@address1': params['@address1'],
@@ -136,8 +136,8 @@ function sweepStake(params){
       '@countryCode': 'US',
       '@stateCode': params['@state'],
       '@zipCode': params['@zip'],
-      '@firstname': params['@firstName'],
-      '@lastname': params['@lastName'],
+      '@firstName': params['@firstName'],
+      '@lastName': params['@lastName'],
       '@email': params.email
     }
 
@@ -150,10 +150,22 @@ function sweepStake(params){
       '@url': params.url
     }
 
-    entry.customFieldValues = {
-      '@sponsor_optin': params.optin,
-      '@accept_terms': params.rules
-    }
+    entry.customFieldValues = [
+      {
+        'customFieldValue': {
+          '@name': 'optin',
+          '@value': params.optin? 'true': 'false',
+          '@type': 'TEXT'
+        }
+      },
+      {
+        'customFieldValue': {
+          '@name': 'rules',
+          '@value': params.rules? 'true': 'false',
+          '@type': 'TEXT'
+        }
+      }
+    ]
 
     let json = {
       sweepstakeEntry: {
@@ -172,7 +184,7 @@ function sweepStake(params){
         url: url,
         method: 'POST',
         headers: {
-          key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
+          key: 'JezBoyaQZaYXeEP6KCPnOcz1mP0='
         },
         /*oauth: {
          consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
@@ -189,18 +201,3 @@ function sweepStake(params){
     )
   })
 }
-
-function apiCreateUser(){
-  api('/service/externalUser/provision', {"email":uuid.v4() +"@testnewyorker.com",
-    "password": "123123", "site":"SLF", "provisionerType":"amg",
-    "address1":"1166 Sixth Ave",
-    "registrationSource":"CNEE_SLF"} )
-
-  request(requestObject, function(error, response, rawResponse){
-    console.log("Response for user creation call");
-    let amgUuid = response.body.externalId;
-    console.dir(rawResponse);
-    setTimeout(function(){performAPILogin();}, 1000);
-  });
-
-};
