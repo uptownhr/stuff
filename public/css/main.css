@@ -395,6 +395,10 @@ p.create-account {
     margin-bottom: 64px;
 }
 
+#state {
+    color: #919191;
+}
+
 @media screen and (max-width: 768px){
     .desktop {
         display: none;
@@ -535,7 +539,7 @@ p.create-account {
         width: 100%;
         margin-top: 12px;
     }
-    input {
+    input, select {
         text-transform: none;
     }
     #form2 input, #form2 select {

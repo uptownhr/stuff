@@ -58,6 +58,10 @@ jQuery(document).ready(function($){
             $('input[name="'+field+'"]').val('0'); 
         }
     });
+    
+    $('#state').change(function(){
+       $(this).css('color','black'); 
+    });
 
 });
 

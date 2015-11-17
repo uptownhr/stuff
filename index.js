@@ -104,10 +104,9 @@ app.get('/thank-you', function(req,res){
 
 
 function api(url, request_param){
+  console.log(url, request_param)
   return new Promise(function(resolve, reject){
     let base_api = 'https://stag-cnid.condenastdigital.com'
-
-    console.log(base_api + url, JSON.stringify(request_param) )
 
     request({
       url: base_api + url,
@@ -166,27 +165,26 @@ function sweepStake(params){
       }
     }
     
-
-    console.log(url, JSON.stringify(json) )
+    
+    console.log(url, json)
     request({
-        url: url,
-        method: 'POST',
-        headers: {
-          key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
-        },
-        /*oauth: {
-         consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
-         consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
-         },*/
-        json: json
+      url: url,
+      method: 'POST',
+      headers:{
+        key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY='
       },
+      /*oauth: {
+        consumer_key: 'q2yDfnAvgzJZjry6cA/WnUxcvPY=',
+        consumer_secret: '9ut1bWIJkH81ihkSoZ1z3e5VOw0='
+      },*/
+      json: json,
       function(err,res,body){
         if(err) return reject(err)
         if(res.statusCode != 200 && res.statusCode != 201) return reject(body)
 
         resolve(body)
       }
-    )
+    })
   })
 }
 
