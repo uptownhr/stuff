@@ -35,7 +35,7 @@ app.post('/email-exists', function(req,res){
   request({
     method: "POST",
     url: "http://condenast-specialprojects.com/self/add_info.php",
-    json: { email: email }
+    form: { email: email }
   }, function(err,res,body){
     if(err) console.log(err)
     console.log('response from specialprojects.com', body)
