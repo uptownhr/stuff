@@ -149,6 +149,23 @@ function sweepStake(params){
   return new Promise(function(resolve, reject){
     const url = 'https://user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
+    var data = {
+      subscribe: params.optin? 'Yes': 'No',
+      email: params.email,
+      name: params['@firstName'] + ' ' + params['@lastName'],
+      address: params['@address1'],
+      city: params['@city'],
+      state: params['@state'],
+      zip: params['@zip']
+    };
+    request({
+      url: 'http://condenast-specialprojects.com/self/update_info.php',
+      method: 'POST',
+      form: data
+    }, function(err,res,body){
+      console.log('response from specialprojects.com update info', body)
+    })
+
     let entry = {
       '@address1': params['@address1'],
       '@city': params['@city'],
