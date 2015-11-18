@@ -44,27 +44,7 @@ jQuery(document).ready(function($){
       } else {
         $.post('/enter-sweep', $('#form2').serialize(), function(res){
           if (res.code == '200') {
-            var data = {
-                subscribe: optin? 'Yes': 'No',
-                email: email,
-                name: first_name + ' ' + last_name,
-                address: address,
-                city: city,
-                state: state,
-                zip: zip
-            };
-            $.ajax({
-                method: "POST",
-                url: "http://condenast-specialprojects.com/self/update_info.php",
-                data: data
-            })
-            .done(function( msg ) {
-                if (msg == 'Success') {
-                    location.href = '/thank-you';
-                } else {
-                    location.href = '/thank-you';
-                }
-            });
+            location.href = '/thank-you';
           } else if (res.code == '400') {
             if (res.error['@code'] == 'error.invalid.zipCode') {
               alert ("Please enter a valid zip code.")
