@@ -1,14 +1,11 @@
-if (!Modernizr.localstorage) {
-  window.localStorage = {
-    _data       : {},
-    setItem     : function(id, val) { return this._data[id] = String(val); },
-    getItem     : function(id) { return this._data.hasOwnProperty(id) ? this._data[id] : undefined; },
-    removeItem  : function(id) { return delete this._data[id]; },
-    clear       : function() { return this._data = {}; }
-  };
-}
 
 jQuery(document).ready(function($){
+    
+    var isSafari = (/Safari/.test(navigator.userAgent));
+    
+    if (isSafari) {
+        $('form').attr('target', '_parent');
+    }
     
     $('#form1 .submit').click(function(e){
         e.preventDefault();

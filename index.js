@@ -33,15 +33,6 @@ app.post('/email-exists', function(req,res){
   if( !email || email.length < 1 ) return res.status(400).send('bad email')
   req.session.email = email
 
-  request({
-    method: "POST",
-    url: "http://condenast-specialprojects.com/self/add_info.php",
-    json: { email: email }
-  }, function(err,res,body){
-    if(err) console.log(err)
-    console.log('response from specialprojects.com', body)
-  })
-
   api( '/service/externalUser/doesUserExist', {email: email, provisionerType: provisionerType})
     .then( function(user){
       console.log('check user response', user)
