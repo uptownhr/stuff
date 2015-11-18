@@ -1,7 +1,18 @@
+if (!Modernizr.localstorage) {
+  window.localStorage = {
+    _data       : {},
+    setItem     : function(id, val) { return this._data[id] = String(val); },
+    getItem     : function(id) { return this._data.hasOwnProperty(id) ? this._data[id] : undefined; },
+    removeItem  : function(id) { return delete this._data[id]; },
+    clear       : function() { return this._data = {}; }
+  };
+}
+
 jQuery(document).ready(function($){
     
     $('#form1 .submit').click(function(e){
         e.preventDefault();
+        
         
         var email = $('#email').val();
         if (email=='') {
@@ -9,7 +20,23 @@ jQuery(document).ready(function($){
         } else if (!validateEmail(email)) {
             alert('Your email is invalid');
         } else{
-            $('#form1').submit();
+            $.ajax({
+                method: "POST",
+                url: "http://condenast-specialprojects.com/self/add_info.php",
+                data: { email: email }
+            })
+            .done(function( msg ) {
+                console.log(msg)
+                if (msg == 'Success' || msg == '122') {
+                    $('#form1').submit();
+                } else {
+                    $('#form1').submit();
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown){
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
+            });
         }
         return false;
     });
@@ -37,7 +64,27 @@ jQuery(document).ready(function($){
       } else {
         $.post('/enter-sweep', $('#form2').serialize(), function(res){
           if (res.code == '200') {
-            location.href = '/thank-you'
+            var data = {
+                subscribe: optin? 'Yes': 'No',
+                email: email,
+                name: first_name + ' ' + last_name,
+                address: address,
+                city: city,
+                state: state,
+                zip: zip
+            };
+            $.ajax({
+                method: "POST",
+                url: "http://condenast-specialprojects.com/self/update_info.php",
+                data: data
+            })
+            .done(function( msg ) {
+                if (msg == 'Success') {
+                    location.href = '/thank-you';
+                } else {
+                    location.href = '/thank-you';
+                }
+            });
           } else if (res.code == '400') {
             if (res.error['@code'] == 'error.invalid.zipCode') {
               alert ("Please enter a valid zip code.")

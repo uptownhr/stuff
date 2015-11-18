@@ -105,7 +105,7 @@ body {
     margin-right: 20px;
 }
 
-input, select, textarea {
+input, select, textarea, button {
     background: white;
     border-radius: 0;
     width: 100%;
@@ -137,6 +137,8 @@ input, select, textarea {
     color: white;
     text-align: center;
     line-height: 1;
+    border: none;
+    width: 100%;
 }
 
 #page-1 .submit {
@@ -145,7 +147,7 @@ input, select, textarea {
     text-transform: uppercase;
 }
 
-#page-1 input {
+#page-1 input, #page-1 input {
     box-shadow: 3px 3px 0 0 rgba(0,0,0,0.1);
     margin-bottom: 16px;
 }
@@ -292,7 +294,7 @@ hr {
     margin: 36px auto 0;
 }
 
-#form2 input, #form2 select {
+#form2 input, #form2 select, #form2 button {
     padding: 12px 11px 8px;
     margin-bottom: 13px;
     float: left;
@@ -576,10 +578,10 @@ p.create-account {
         margin-top: 12px;
         margin-top: 7px;
     }
-    input, select {
+    input, select, button {
         text-transform: none;
     }
-    #form2 input, #form2 select {
+    #form2 input, #form2 select, #form2 button {
         border: 1px solid rgba(0,0,0,0.33);
         font-size: 42px;
         height: 85px;
