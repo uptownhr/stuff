@@ -31,7 +31,6 @@ app.post('/email-exists', function(req,res){
   let email = req.body.email
 
   if( !email || email.length < 1 ) return res.status(400).send('bad email')
-  req.session.email = email
 
   request({
     method: "POST",
@@ -44,18 +43,12 @@ app.post('/email-exists', function(req,res){
 
   api( '/service/externalUser/doesUserExist', {email: email, provisionerType: provisionerType})
     .then( function(user){
-      console.log('check user response', user)
-      req.session.user = user
-      if(user != 'not found') {
-        req.session.user = user
-      }else{
-        req.session.user = null
-      }
+      console.log('check user response', user.exists)
+      let registered = user.exists? '1':'0'
 
-      res.redirect('/sweep')
+      res.redirect('/sweep?email=' + email + '&registered=' + registered)
     })
     .catch( function(err){
-      req.session.user = ''
       res.redirect('/')
     })
 
@@ -76,13 +69,16 @@ app.post('/email-exists', function(req,res){
 })
 
 app.get('/sweep', function(req, res){
-  let email = req.session.email
+  let email = req.query.email,
+    registered = req.query.registered
+
+  console.log(email,registered)
 
   if( !email ) res.redirect('/')
 
   res.render('sweep', {
-    email: req.session.email,
-    exists: (req.session.user && req.session.user.exists)
+    email: email,
+    exists: registered
   })
 })
 
