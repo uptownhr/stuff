@@ -1,5 +1,11 @@
 jQuery(document).ready(function($){
     
+    var isSafari = (/Safari/.test(navigator.userAgent));
+    
+    if (isSafari) {
+        $('form').attr('target', '_parent');
+    }
+    
     $('#form1 .submit').click(function(e){
         e.preventDefault();
         
