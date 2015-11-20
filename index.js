@@ -150,7 +150,7 @@ function sweepStake(params){
     const url = 'https://user-service.condenastdigital.com/open/sweepstake/self_toneitup_stcroix/entries'
 
     var data = {
-      subscribe: params.optin? 'Yes': 'No',
+      subscribe: params.optin == 1? 'true': 'false',
       email: params.email,
       name: params['@firstName'] + ' ' + params['@lastName'],
       address: params['@address1'],
@@ -190,7 +190,7 @@ function sweepStake(params){
       {
         'customFieldValue': {
           '@name': 'optin',
-          '@value': params.optin? 'true': 'false',
+          '@value': params.optin == 1? 'true': 'false',
           '@type': 'TEXT'
         }
       },
