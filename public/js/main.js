@@ -1,9 +1,18 @@
 jQuery(document).ready(function($){
     
-    var isSafari = (/Safari/.test(navigator.userAgent));
+    //var isSafari = (/Safari/.test(navigator.userAgent));
+    //
+    //if (isSafari) {
+    //    $('form').attr('target', '_parent');
+    //}
+    //
     
-    if (isSafari) {
-        $('form').attr('target', '_parent');
+    var registered = getParameterByName('registered');
+    
+    if (registered != undefined && registered != '1') {
+        $('.create-account-wrapper').show();
+        $('.create-account-wrapper-hide').hide();
+        $('#page-2').addClass('noaccount');
     }
     
     $('#form1 .submit').click(function(e){
@@ -72,6 +81,13 @@ jQuery(document).ready(function($){
     });
 
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

@@ -2,7 +2,7 @@ extends layouts/default
 
 block content
   
-  section#page-2(class=(exists ? 'container' : 'container noaccount'))
+  section#page-2(class='container')
     .head
       span New Year Self Tone It Up Challenge
     .clear
@@ -80,7 +80,7 @@ block content
           input(type='text', name='@zip', placeholder='Zip', id='zip')
           input(type='hidden', name='email', value='#{email}')
           .clear
-          if exists == '1'
+          .create-account-wrapper-hide
             input(type='button', class='submit', value='SIGN UP NOW')
           .clear
           .checkboxes
@@ -92,7 +92,7 @@ block content
             input(type='hidden', name='optin', value='0', id='optin')
             label Receive more information and special offers from The Buccaneer Resort, St. Croix.
         .clear
-        if exists == '0'
+        .create-account-wrapper
           h3 Create an account!
           p.create-account
             | Always stay in the know with the newest topics,#[br.desktop]

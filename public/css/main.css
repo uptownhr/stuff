@@ -401,6 +401,11 @@ p.create-account {
     color: #919191;
 }
 
+.create-account-wrapper {
+    
+    display: none;
+}
+
 @media screen and (max-width: 768px){
     .desktop {
         display: none;

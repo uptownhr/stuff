@@ -190,7 +190,7 @@ function sweepStake(params){
       {
         'customFieldValue': {
           '@name': 'optin',
-          '@value': params.optin? 'true': 'false',
+          '@value': params.optin,
           '@type': 'TEXT'
         }
       },
